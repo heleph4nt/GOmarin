@@ -4,7 +4,7 @@
 [link to github](https://github.com/valentynbez/tmvec)
 
 ```
-conda create -n tmvec python -c pytorch
+conda create -n tmvec python=3.10 -c pytorch
 pip install git+https://github.com/valentynbez/tmvec.git
 ```
 
