@@ -6,6 +6,7 @@
 ```
 conda create -n tmvec python=3.10 -c pytorch
 pip install git+https://github.com/valentynbez/tmvec.git
+conda install click
 ```
 
 ```
