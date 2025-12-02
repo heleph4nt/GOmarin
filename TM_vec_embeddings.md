@@ -20,6 +20,7 @@ tmvec build-db \
 Uniprot -> taxid 1117 (cyanobacteriota) -> Status: reviewed (Swissprot) --> 13000 proteins
 
 ## Bacteriota
+330 000 séquences 
 
 (taxonomy_id:2) AND ((existence:3) OR (existence:2) OR (existence:1)) AND (length:[* TO 1200]) 
 
