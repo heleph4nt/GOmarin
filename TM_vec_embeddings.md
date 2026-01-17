@@ -16,6 +16,13 @@ tmvec build-db \
     --output db_test/small_fasta
 ```
 
+```
+tmvec search \
+    --input-fasta cyano.original.fasta
+    --database big_chunk_0_1_2_combined.npz
+    --output folder/folder
+```
+
 ## Source for swissprot sequences:
 Uniprot -> taxid 1117 (cyanobacteriota) -> Status: reviewed (Swissprot) --> 13000 proteins
 
