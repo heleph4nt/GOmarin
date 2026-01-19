@@ -16,10 +16,11 @@ tmvec build-db \
 ```
 
 ## Bacteriota from Uniprot 
-~330 000 séquences
 
 Features : Entry_name, Organism, Sequence, Gene Ontology (MF),  Gene Ontology (CP), Gene Ontology (CC), Pfam, Interpro
 (taxonomy_id:2) AND ((existence:3) OR (existence:2) OR (existence:1)) AND (length:[* TO 1200]) 
+
+~330 000 séquences
 
 --> trembl & swissprot
 
@@ -30,6 +31,7 @@ En fonction de la taille du fichier fasta, la génération des embeddings peut p
 Télécharger les fichiers du modèle TM-Vec:
 - `tm_vec_cath_model.ckpt` - TM-Vec model checkpoint
 - `tm_vec_cath_model_params.json` - TM-Vec configuration file
+
 Disponible sur : https://figshare.com/articles/dataset/TMvec_DeepBLAST_models/25810099?file=46296310
 
 Besoin du dossier tm_vec téléchargé
