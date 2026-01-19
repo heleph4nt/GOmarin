@@ -12,9 +12,16 @@ then: `conda activate PlasmoFP`
 
 PlasmoFP folder contains: re-written PlasmoFP code, so that we do not need jupyter notebooks (it is a hassle to get them to work on a server)
 
-## Récupération des données : 
+## Récupération des données de bactéries sur Uniprot : 
 
 Séquences protéiques de bactéries sur Uniprot en format tsv : 
+
+Features : Entry_name, Organism, Sequence, Gene Ontology (MF),  Gene Ontology (CP), Gene Ontology (CC), Pfam, Interpro
+(taxonomy_id:2) AND ((existence:3) OR (existence:2) OR (existence:1)) AND (length:[* TO 1200]) 
+
+~330 000 séquences
+
+--> trembl & swissprot
 
 ## Création des jeux de données d'entrainement, de test et de validation + Generation des embeddings : 
 
