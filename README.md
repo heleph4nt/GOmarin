@@ -1,6 +1,6 @@
 # GOmarin : 
 
-Reprise du modèle de PlasmoFP (https://github.com/harshstava/PlasmoFP_public/tree/main) pour les séquences de cyanobactéries. Uniquement testé sur le sous-ensemble 'Molécular Function'.
+Reprise et adpatation du modèle de PlasmoFP (https://github.com/harshstava/PlasmoFP_public/tree/main) pour les séquences de cyanobactéries. Uniquement testé sur le sous-ensemble 'Molécular Function'.
 
 start: `srun --pty bash` opens a bash session
 
