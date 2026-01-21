@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ========================
-# 0) 配置你的文件路径
+# 0) Paths
 # ========================
 # SHUF_PATH = "/shared/projects/deepmar/data/cyanobacteriota/marine_unlabeled_data/shuffled_search_in_bacteria_test/shuffled_results.tsv"
 # ORIG_PATH = "/shared/projects/deepmar/data/cyanobacteriota/marine_unlabeled_data/original_search_in_bacteria_test/original_results.tsv"
@@ -16,7 +16,7 @@ GO_MAP_PATHS = [
     "/shared/projects/deepmar/data/bacteria_sequences/uniprot_taxonomy_bacteria_20_11_2025.tsv"
 ]
 
-OUT_DIR   = "/shared/projects/deepmar/data/plot/test_3"
+OUT_DIR   = "/shared/projects/deepmar/data/plot/test"
 TOPK      = 5
 N_STEPS   = 101
 PLOT_DPI  = 180
@@ -24,18 +24,13 @@ PLOT_DPI  = 180
 os.makedirs(OUT_DIR, exist_ok=True)
 
 
-# ========= 基础函数 =========
+# ========= Functions =========
 def read_predictions(path: str) -> pd.DataFrame:
-    """
-    读 tmvec search 输出 tsv，兼容列名差异，输出统一列：
-    query_id, tm-score, rank
-    """
     if not os.path.exists(path):
         raise FileNotFoundError(path)
 
     df = pd.read_csv(path, sep="\t")
 
-    # 容错列名
     ren = {}
     for c in df.columns:
         l = c.lower().replace("_", "-")
@@ -50,12 +45,11 @@ def read_predictions(path: str) -> pd.DataFrame:
 
     need = {"query_id", "tm-score"}
     if not need.issubset(df.columns):
-        raise ValueError(f"{path} 缺列: {need - set(df.columns)}; got {list(df.columns)}")
+        raise ValueError(f"{path} lack of coloum: {need - set(df.columns)}; got {list(df.columns)}")
 
     df["tm-score"] = pd.to_numeric(df["tm-score"], errors="coerce")
     df = df.dropna(subset=["tm-score"])
 
-    # 若无 rank，则以 tm-score 降序构造 rank（query 内）
     if "rank" not in df.columns:
         df["rank"] = df.groupby("query_id")["tm-score"].rank(
             method="first", ascending=False
@@ -65,10 +59,6 @@ def read_predictions(path: str) -> pd.DataFrame:
 
 
 def harmonize_and_topk(orig: pd.DataFrame, shuf: pd.DataFrame, topk=10):
-    """
-    1) 只保留 orig & shuf 共同的 query（保证分母一致）
-    2) 每个 query 取 topK（按 tm-score 降序）
-    """
     common_q = np.intersect1d(orig["query_id"].unique(), shuf["query_id"].unique())
     orig = orig[orig["query_id"].isin(common_q)].copy()
     shuf = shuf[shuf["query_id"].isin(common_q)].copy()
@@ -83,17 +73,15 @@ def harmonize_and_topk(orig: pd.DataFrame, shuf: pd.DataFrame, topk=10):
     return orig, shuf, common_q
 
 
-# ========= 主流程 =========
+# ========= Main =========
 orig = read_predictions(ORIG_PATH)
 shuf = read_predictions(SHUF_PATH)
 orig, shuf, common_q = harmonize_and_topk(orig, shuf, topk=TOPK)
 
-# 总 sequence 数量（按共同 query 数量；与你例子中的 4212 对应）
 TOTAL_SEQS = int(len(common_q))
 if TOTAL_SEQS == 0:
-    raise ValueError("orig 与 shuf 没有共同的 query_id，无法计算 FDR。")
+    raise ValueError("orig and shuf have 0 commun query_id，cannot calculate FDR。")
 
-# ========= 阈值扫描（新逻辑） =========
 thresholds = np.linspace(0, 1, N_STEPS)
 rows = []
 
@@ -101,11 +89,10 @@ for thr in thresholds:
     o = orig[orig["tm-score"] >= thr]
     s = shuf[shuf["tm-score"] >= thr]
 
-    # prediction 数量：在该阈值下至少有一条命中的 query 数量
     orig_pred = int(o["query_id"].nunique()) if len(o) else 0
     shuf_pred = int(s["query_id"].nunique()) if len(s) else 0
 
-    # ✅ 新 FDR：shuffled prediction 数量 / 总 sequence 数量
+    # FDR：shuffled prediction / total number of sequence
     FDR = shuf_pred / TOTAL_SEQS
 
     rows.append({
@@ -120,7 +107,7 @@ curve = pd.DataFrame(rows)
 curve_path = os.path.join(OUT_DIR, f"tmvec_fdr_curve_new_top{TOPK}.tsv")
 curve.to_csv(curve_path, sep="\t", index=False)
 
-# ========= 画图：x=FDR, y=orig_pred（不裁剪 FDR） =========
+# ========= Plot：x=FDR, y=orig_pred =========
 plt.figure()
 plt.plot(curve["FDR"], curve["orig_pred"], marker="o", linewidth=1)
 plt.xlabel("FDR = (#shuffled predictions) / (total #sequences)")
