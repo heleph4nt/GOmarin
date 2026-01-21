@@ -1,6 +1,6 @@
 # GOmarin: 
 
-Adpatation of PlasmoFP model (https://github.com/harshstava/PlasmoFP_public/tree/main) for cyanobacterial sequences. Only tested on the 'Molécular Function' subontology.
+Adpatation of PlasmoFP model (https://github.com/harshstava/PlasmoFP_public/tree/main) for cyanobacterial sequences. Only tested on the 'Molecular Function' subontology.
 
 start: `srun --pty bash` opens a bash session
 
