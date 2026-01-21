@@ -78,3 +78,9 @@ Use the shell script (run_generate_embeddings.sh) by modifying it to call the co
 Refer to the generate_embeddings.py script for formatting.  
 
 ## Use of TM-Vec Search
+
+tmvec search \
+    --input-fasta cyano.original.fasta \
+    --database big_chunk_0_1_2_combined.npz \
+    --output results/folder \
+    --k-nearest 1
