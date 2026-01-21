@@ -105,6 +105,10 @@ tmvec search \
     --k-nearest 1
 ```
 
+## Use of fdr_plot.py and fdr_plot_new.py
+Execute the script directly in the terminal. No other input arguments needed. 
+(You need to modify paths and parameters in the script)
+
 ## Use of fdr_plot_ia.py
 
 ```
@@ -146,3 +150,12 @@ python plot/plot_go_dist_freq.py \
     --threshold 4
 ```
 
+## Use of pca2d.py
+
+```
+python plot_db_original_shuffled_pca2d.py \
+  --db_npz bacteria_sequences/embeddings/big_chunk_0_1_2_combined.npz \
+  --orig_npz cyanobacteriota/marine_unlabeled_data/original_test/embeddings/query_embeddings.npz \
+  --shuf_npz cyanobacteriota/marine_unlabeled_data/shuffled_test/embeddings/query_embeddings.npz \
+  --out_prefix compare_db_orig_shuf 
+```
