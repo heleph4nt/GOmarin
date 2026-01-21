@@ -1,0 +1,31 @@
+name: PlasmoFP
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.12
+  - biopython
+  - mmseqs2
+  - scipy
+  - pandas
+  - obonet
+  - scikit-learn
+  - numpy
+  - requests
+  - networkx
+  - tqdm
+  - ipykernel
+  - matplotlib
+  - python-stratify
+  - seaborn
+  - goatools
+    - pip:
+      - faiss-cpu==1.13.2
+      - huggingface-hub==0.36.0
+      - iterative-stratification==0.1.9
+      - pytorch-lightning==2.6.0
+      - sentencepiece==0.2.1
+      - torch==2.9.1
+      - torchmetrics==1.8.2
+      - torchvision==0.24.1
+      - transformers==4.57.5
