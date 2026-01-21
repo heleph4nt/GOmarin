@@ -6,7 +6,7 @@ start: `srun --pty bash` opens a bash session
 
 `. /local/env/envconda.sh` to use conda
 
-create the conda environment: `conda create -n PlasmoFP python=3.12 -r requirements.txt`
+create the conda environment: `conda create -n PlasmoFP python=3.12 -f PlasmoFP.yaml`
 
 then: `conda activate PlasmoFP`
 
@@ -25,6 +25,12 @@ Features : Entry_name, Organism, Sequence, Gene Ontology (MF),  Gene Ontology (C
 
 Download the go-basic.obo file from https://current.geneontology.org/ontology/go-basic.obo.
 create_data_split/create_data_split_function_only.ipynb
+
+## Usage of Cluster
+
+We used the capabilities of the IFB core cluster to run the jupyter notebooks using GPU.
+
+https://doc.cluster.france-bioinformatique.fr/software/jupyter/
 
 ## Training models for predicting GO 'MF' terms and selecting parameters for the final model: 
 
