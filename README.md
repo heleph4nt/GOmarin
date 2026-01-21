@@ -109,7 +109,7 @@ In case there is an error such as “ValueError: Shape of passed values is (4212
 
 for debugging, the script cli.py need to be modified at line 290:
 
-save_results(values, near_ids, **target_headers**, output/"results.tsv") => save_results(values, near_ids, **headers**, output / "results.tsv")
+save_results(values, near_ids, **target_headers**, output/"results.tsv") => save_results(values, near_ids, **headers**, output/"results.tsv")
 
 ## Use of fdr_plot.py and fdr_plot_new.py
 Run the script directly in the terminal. No other input arguments needed. 
