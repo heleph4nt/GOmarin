@@ -1,6 +1,6 @@
 # GOmarin: 
 
-Reprise et adpatation du modèle de PlasmoFP (https://github.com/harshstava/PlasmoFP_public/tree/main) pour les séquences de cyanobactéries. Uniquement testé sur le sous-ensemble 'Molécular Function'.
+Adpatation of PlasmoFP model (https://github.com/harshstava/PlasmoFP_public/tree/main) for cyanobacterial sequences. Only tested on the 'Molécular Function' subontology.
 
 start: `srun --pty bash` opens a bash session
 
@@ -9,8 +9,6 @@ start: `srun --pty bash` opens a bash session
 create the conda environment: `conda create -n PlasmoFP python=3.12 -r requirements.txt`
 
 then: `conda activate PlasmoFP`
-
-PlasmoFP folder contains: re-written PlasmoFP code, so that we do not need jupyter notebooks (it is a hassle to get them to work on a server)
 
 ## Downloading bacterial data from Uniprot: 
 
@@ -25,6 +23,7 @@ Features : Entry_name, Organism, Sequence, Gene Ontology (MF),  Gene Ontology (C
 
 ## Creation of training, test, and validation datasets + Generation of embeddings: 
 
+Download the go-basic.obo file from https://current.geneontology.org/ontology/go-basic.obo.
 create_data_split/create_data_split_function_only.ipynb
 
 ## Training models for predicting GO 'MF' terms and selecting parameters for the final model: 
