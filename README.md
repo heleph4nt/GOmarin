@@ -57,25 +57,24 @@ tmvec build-db \
     --input-fasta small_embed.fasta \
     --output db_test/small_fasta
 ```
+## Use TM-Vec to generate embeddings
 
-## Utiliser Tm-Vec pour récupèrer les embeddings
+Depending on the size of the fasta file, generatnig embeddings can take several hours. It may be necessary to use a GPU. Only the npz (and npy) format output is used.  
 
-En fonction de la taille du fichier fasta, la génération des embeddings peut prendre plusieurs heures. Il peut être nécessaire d'utiliser un GPU. Seulement la sortie au format npz est utillisée. 
-
-Télécharger les fichiers du modèle TM-Vec:
+Download the TM-Vec model files:
 - `tm_vec_cath_model.ckpt` - TM-Vec model checkpoint
 - `tm_vec_cath_model_params.json` - TM-Vec configuration file
 
-Disponible sur : https://figshare.com/articles/dataset/TMvec_DeepBLAST_models/25810099?file=46296310
+Available on : https://figshare.com/articles/dataset/TMvec_DeepBLAST_models/25810099?file=46296310
 
-Besoin du dossier tm_vec téléchargé
+Need the downloaded tm_vec folder.
 
-Méthode 1 : 
-Générer les embeddings directement dans le create_data_splits_function_only.ipynb
+Method 1 : 
+Generate embeddings directly in the file create_data_splits_function_only.ipynb
 
-Méthode 2 : 
-Utiliser le script shell (run_generate_embeddings.sh) en le modifiant pour bien utiliser les fichiers correspondant.
+Method 2 : 
+Use the shell script (run_generate_embeddings.sh) by modifying it to call the corresponding files.
 
-Voir le script de generate_embeddings pour la mise en forme. 
+Refer to the generate_embeddings.py script for formatting.  
 
-## Utilisation du TM-Vec Search 
+## Use of TM-Vec Search
