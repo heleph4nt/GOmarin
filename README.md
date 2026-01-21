@@ -6,7 +6,7 @@ start: `srun --pty bash` opens a bash session
 
 `. /local/env/envconda.sh` to use conda
 
-create the conda environment: `conda create -n PlasmoFP python=3.12 -f PlasmoFP.yaml`
+create the conda environment: `conda create -n PlasmoFP -f PlasmoFP.yaml`
 
 then: `conda activate PlasmoFP`
 
@@ -21,16 +21,18 @@ Features : Entry_name, Organism, Sequence, Gene Ontology (MF),  Gene Ontology (C
 
 --> trembl & swissprot
 
-## Creation of training, test, and validation datasets + Generation of embeddings: 
-
-Download the go-basic.obo file from https://current.geneontology.org/ontology/go-basic.obo.
-create_data_split/create_data_split_function_only.ipynb
-
 ## Usage of Cluster
 
 We used the capabilities of the IFB core cluster to run the jupyter notebooks using GPU.
 
 https://doc.cluster.france-bioinformatique.fr/software/jupyter/
+
+
+## Creation of training, test, and validation datasets + Generation of embeddings: 
+
+Download the go-basic.obo file from https://current.geneontology.org/ontology/go-basic.obo.
+
+`create_data_split/create_data_split_function_only.ipynb`
 
 ## Training models for predicting GO 'MF' terms and selecting parameters for the final model: 
 
@@ -45,6 +47,7 @@ model_function/Inference.ipynb
 
 [link to github](https://github.com/valentynbez/tmvec)
 
+Conda environment
 ```
 conda create -n tmvec python=3.10 -c pytorch
 conda activate tmvec
@@ -52,11 +55,6 @@ pip install git+https://github.com/valentynbez/tmvec.git
 conda install click
 ```
 
-```
-tmvec build-db \
-    --input-fasta small_embed.fasta \
-    --output db_test/small_fasta
-```
 ## Use TM-Vec to generate embeddings
 
 Depending on the size of the fasta file, generatnig embeddings can take several hours. It may be necessary to use a GPU. Only the npz (and npy) format output is used.  
@@ -67,20 +65,42 @@ Download the TM-Vec model files:
 
 Available on : https://figshare.com/articles/dataset/TMvec_DeepBLAST_models/25810099?file=46296310
 
-Need the downloaded tm_vec folder.
+### For PlasmoFP:
 
-Method 1 : 
+This does not filter out long sequences
+Also creates the .npy file used by PlasmoFP, instead of just the .npz file created by native tmvec.
+
+#### Method 1 : 
 Generate embeddings directly in the file create_data_splits_function_only.ipynb
 
-Method 2 : 
-Use the shell script (run_generate_embeddings.sh) by modifying it to call the corresponding files.
+#### Method 2 : 
 
+Use the shell script (run_generate_embeddings.sh) by modifying it to call the corresponding files. 
 Refer to the generate_embeddings.py script for formatting.  
+
+### For general use
+
+Filters out sequences with length > 1024
+
+You can use split_fasta.sh to separate the fasta file into several smaller ones, then combine_embeddings.py to merge the .npz files.
+
+
+Command to create embeddings for a fasta file:
+
+```
+tmvec build-db \
+    --input-fasta sequences.fasta \
+    --output db_test/small_fasta
+```
+
+The slurm script for this is available in generate_embeddings/tmvec.sh
 
 ## Use of TM-Vec Search
 
+```
 tmvec search \
     --input-fasta cyano.original.fasta \
     --database big_chunk_0_1_2_combined.npz \
     --output results/folder \
     --k-nearest 1
+```
