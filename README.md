@@ -1,4 +1,4 @@
-# GOmarin : 
+# GOmarin: 
 
 Reprise et adpatation du modèle de PlasmoFP (https://github.com/harshstava/PlasmoFP_public/tree/main) pour les séquences de cyanobactéries. Uniquement testé sur le sous-ensemble 'Molécular Function'.
 
@@ -12,25 +12,25 @@ then: `conda activate PlasmoFP`
 
 PlasmoFP folder contains: re-written PlasmoFP code, so that we do not need jupyter notebooks (it is a hassle to get them to work on a server)
 
-## Récupération des données de bactéries sur Uniprot : 
+## Downloading bacterial data from Uniprot: 
 
-Séquences protéiques de bactéries sur Uniprot en format tsv : 
+Protein sequences of bacteria from Uniprot in TSV format: 
 
 Features : Entry_name, Organism, Sequence, Gene Ontology (MF),  Gene Ontology (CP), Gene Ontology (CC), Pfam, Interpro
 (taxonomy_id:2) AND ((existence:3) OR (existence:2) OR (existence:1)) AND (length:[* TO 1200]) 
 
-~330 000 séquences
+~330 000 sequences
 
 --> trembl & swissprot
 
-## Création des jeux de données d'entrainement, de test et de validation + Generation des embeddings : 
+## Creation of training, test, and validation datasets + Generation of embeddings: 
 
 create_data_split/create_data_split_function_only.ipynb
 
-## Entrainenement des modèles pour la prédiction de termes G0 'MF' et choix des paramètres du modèle final: 
+## Training models for predicting GO 'MF' terms and selecting parameters for the final model: 
 
 model_function/MF_architecture_tune.ipynb
 
-## Prédiction des terles GO grâce au modèle : 
+## Predicting GO terms using the model : 
 
 model_function/Inference.ipynb
