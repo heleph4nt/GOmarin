@@ -19,6 +19,7 @@ dependencies:
   - python-stratify
   - seaborn
   - goatools
+  - umap-learn
     - pip:
       - faiss-cpu==1.13.2
       - huggingface-hub==0.36.0
