@@ -104,3 +104,45 @@ tmvec search \
     --output results/folder \
     --k-nearest 1
 ```
+
+## Use of fdr_plot_ia.py
+
+```
+python plot/fdr_plot_ia.py \
+    --original_tsv bacteria_sequences/function_only/model_training/cyanobact.original.predictions.tsv \
+    --shuffled_tsv bacteria_sequences/function_only/model_training/cyanobact.shuffled.predictions.tsv \
+    --ia_tsv bacteria_sequences/function_only/IA_all.tsv \
+    --ia_threshold 3 \
+    --out_prefix plot/fdr_plot_ia/fdr_ia_thres
+```
+
+## Use of fdr_plot_v2.py
+
+```
+python plot/fdr_plot_v2.py \
+    --original_tsv bacteria_sequences/function_only/model_training/cyanobact.original.predictions.tsv \
+    --shuffled_tsv bacteria_sequences/function_only/model_training/cyanobact.shuffled.predictions.tsv \
+    --json_dict bacteria_sequences/function_only/function_data_json_dict.json \
+    --out_prefix plot/fdr_plot_v2/fdr_dist_4
+```
+
+## Use of fdr_plot_v2_multi.py
+
+```
+python plot/fdr_plot_v2_multi.py \
+    --original_tsv bacteria_sequences/function_only/model_training/cyanobact.original.predictions.tsv \
+    --shuffled_tsv bacteria_sequences/function_only/model_training/cyanobact.shuffled.predictions.tsv \
+    --json_dict bacteria_sequences/function_only/function_data_json_dict.json \
+    --out_prefix plot/fdr_plot_v2/fdr_dist_345
+```
+
+## Use of plot_go_dist_freq.py
+
+```
+python plot/plot_go_dist_freq.py \
+    --terms_tsv bacteria_sequences/function_only/terms_for_IA_calculation.tsv \
+    --json_dict bacteria_sequences/function_only/function_data_json_dict.json \
+    --out_prefix plot/go_dist_vs_freq/test_1 \
+    --threshold 4
+```
+
