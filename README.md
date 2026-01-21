@@ -105,8 +105,14 @@ tmvec search \
     --k-nearest 1
 ```
 
+In case there is an error such as “ValueError: Shape of passed values is (4212, 5), indices imply (327537, 5)” while running tmvec search,
+
+for debugging, the script cli.py need to be modified at line 290:
+
+save_results(values, near_ids, **target_headers**, output/"results.tsv") => save_results(values, near_ids, **headers**, output / "results.tsv")
+
 ## Use of fdr_plot.py and fdr_plot_new.py
-Execute the script directly in the terminal. No other input arguments needed. 
+Run the script directly in the terminal. No other input arguments needed. 
 (You need to modify paths and parameters in the script)
 
 ## Use of fdr_plot_ia.py
